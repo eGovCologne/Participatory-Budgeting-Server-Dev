@@ -14,7 +14,7 @@ function smartip_user_default_permissions() {
   $permissions['create proposal content'] = array(
     'name' => 'create proposal content',
     'roles' => array(
-      0 => 'authenticated user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -23,8 +23,7 @@ function smartip_user_default_permissions() {
   $permissions['dislike node'] = array(
     'name' => 'dislike node',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'authenticated user',
+      'administrator' => 'administrator',
     ),
     'module' => 'likedislike',
   );
@@ -33,7 +32,7 @@ function smartip_user_default_permissions() {
   $permissions['get any binary files'] = array(
     'name' => 'get any binary files',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'services',
   );
@@ -42,8 +41,7 @@ function smartip_user_default_permissions() {
   $permissions['get own binary files'] = array(
     'name' => 'get own binary files',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'authenticated user',
+      'administrator' => 'administrator',
     ),
     'module' => 'services',
   );
@@ -52,8 +50,7 @@ function smartip_user_default_permissions() {
   $permissions['like node'] = array(
     'name' => 'like node',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'authenticated user',
+      'administrator' => 'administrator',
     ),
     'module' => 'likedislike',
   );
