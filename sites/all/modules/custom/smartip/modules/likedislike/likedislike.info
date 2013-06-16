@@ -1,0 +1,7 @@
+name = Like Dislike
+description = "Like and Dislike functionality using Voting API."
+package = Custom Modules
+core = 7.x
+dependencies[] = votingapi
+files[] = likedislike.module
+configure=admin/config/likedislike

@@ -1,0 +1,274 @@
+<?php
+/**
+ * This module will handle the like and dislike functionality of the website.
+ * Right now it handles both node and comment entity.
+ * TODO: Need to have a setting page so that site administration can choose the entity on which he wants the like and dislike functionality to be implemented
+ * It will be great if we can also give the option to select the node types.
+ */
+
+/**
+ * Implementing hook_init()
+ */
+function likedislike_init() {
+	$base_path = base_path();
+	$module_path = drupal_get_path('module', 'likedislike');
+	drupal_add_js($module_path . "/likedislike.js");
+	drupal_add_js("var base_path = '".$base_path."'; var module_path = '".$module_path."';","inline");
+	drupal_add_css($module_path."/templates/likedislike.css");
+}
+
+/**
+ * Implementing hook_permission()
+ */
+function likedislike_permission() {
+	return array(
+		'like node' => array(
+			'title' => t('Add like to node'),
+			'description' => t('Allow users to add like to the nodes.'),
+			'restrict access' => TRUE,
+		),
+		'dislike node' => array(
+			'title' => t('Add dislike to node'),
+			'description' => t('Allow users to add dislike to the nodes.'),
+			'restrict access' => TRUE,
+		),
+		'like comment' => array(
+			'title' => t('Add like to comment'),
+			'description' => t('Allow users to add like to the comments.'),
+			'restrict access' => TRUE,
+		),
+		'dislike comment' => array(
+			'title' => t('Add dislike to comment'),
+			'description' => t('Allow users to add dislike to the comments.'),
+			'restrict access' => TRUE,
+		),
+	);
+}
+
+/**
+ * Implementing hook_theme().
+ */
+function likedislike_theme() {
+	return array(
+		'like' => array(
+			'template' => 'templates/like',
+		),
+		'dislike' => array(
+			'template' => 'templates/dislike',
+		),
+	);
+}
+
+/**
+ * Implementing hook_menu()
+ */
+function likedislike_menu() {
+	//Node like and dislike menu item.
+	$items['likedislike/like/node/add'] = array(
+		'title' => 'Add a like to the entity.',
+		'description' => t('Add a vote to the node entity using voting api.'),
+		'access arguments' => array('like node'),
+		'page callback' => '_add_entity_like',
+	);
+	$items['likedislike/dislike/node/add'] = array(
+		'title' => 'Add a dislike to the entity.',
+		'description' => t('Add a vote to the node entity using voting api.'),
+		'access arguments' => array('dislike node'),
+		'page callback' => '_add_entity_dislike',
+	);
+	
+	//Comment like and dislike menu item.
+	$items['likedislike/like/comment/add'] = array(
+		'title' => 'Add a like to the entity.',
+		'description' => t('Add a vote to the node entity using voting api.'),
+		'access arguments' => array('like comment'),
+		'page callback' => '_add_entity_like',
+	);
+	$items['likedislike/dislike/comment/add'] = array(
+		'title' => 'Add a dislike to the entity.',
+		'description' => t('Add a vote to the node entity using voting api.'),
+		'access arguments' => array('dislike comment'),
+		'page callback' => '_add_entity_dislike',
+	);
+	return $items;
+}
+
+/**
+ * Implementing hook_comment_load()
+ */
+function likedislike_comment_load($comments) {
+	global $user;
+	foreach ($comments as $comment) {
+		$comment->like = theme('like',array(
+			'eid' => $comment->cid,
+			'likes' => _get_entity_vote_count($comment->cid,'like','comment'),
+			'likestatus' => _get_entity_vote_count($comment->cid,'like','comment',$user->uid),
+			'entity' => "entity-comment",
+		));
+		$comment->dislike = theme('dislike', array(
+			'eid' => $comment->cid,
+			'dislikes' => _get_entity_vote_count($comment->cid,'dislike','comment'),
+			'dislikestatus' => _get_entity_vote_count($comment->cid,'dislike','comment',$user->uid),
+			'entity' => "entity-comment",
+		));
+	}
+}
+
+/**
+ * Implement hook_node_load()
+ */
+function likedislike_node_load($nodes, $types) {
+	global $user;
+	foreach ($nodes as $node) {
+		$node->like = theme('like',array(
+			'eid' => $node->nid,
+			'likes' => _get_entity_vote_count($node->nid,'like','node'),
+			'likestatus' => _get_entity_vote_count($node->nid,'like','node',$user->uid),
+			'entity' => "entity-node",
+		));
+		$node->dislike = theme('dislike', array(
+			'eid' => $node->nid,
+			'dislikes' => _get_entity_vote_count($node->nid,'dislike','node'),
+			'dislikestatus' => _get_entity_vote_count($node->nid,'dislike','node',$user->uid),
+			'entity' => "entity-node",
+		));
+	}
+}
+
+/**
+ * This function is getting called to add the vote to the current node.
+ * Data type is post.
+ * Using Voting API to add votes and also to select the number of votes.
+ * TODO: Need to get the value thought a setting page so that admin can set the number of votes that can be added per like
+ * 
+ */
+function _add_entity_like() {
+	global $user;
+	if ($_GET['entityid']) {
+		$nodeId = $_GET['entityid'];
+		$entity_type = $_GET['entity'];
+		//Check if disliked
+		$checkCriteria = array(
+			'entity_id' => $nodeId,
+			'tag' => 'vote_updown',
+			'uid' => $user->uid,
+			'entity_type' => $entity_type,
+		);
+		$dislikeResult = votingapi_select_votes($checkCriteria);
+		$dislikeCount = sizeof($dislikeResult);
+		
+		if ($dislikeCount == 1) {
+			print $dislikeResult->vote_id;
+			votingapi_delete_votes($dislikeResult);
+		}
+		
+		$vote = array(
+			'entity_id' => $nodeId,
+			'value'=> 1,
+			'tag' => 'vote_updown',
+			'entity_type' => $entity_type,
+   'value_type' => 'option',
+		);
+		$setVote = votingapi_set_votes($vote);
+		
+		//Generating the likeCount and dislikeCount again.
+		$criteriaLike = array(
+			'entity_id' => $nodeId,
+			'tag' => 'vote_updown',
+			'entity_type' => $entity_type,
+		);
+		$criteriaDislike = array(
+			'entity_id' => $nodeId,
+			'tag' => 'vote_updown',
+			'entity_type' => $entity_type,
+		);
+		
+		$likeCount = sizeof(votingapi_select_votes($criteriaLike));
+		$dislikeCount = sizeof(votingapi_select_votes($criteriaDislike));
+		print $likeCount . "/" . $dislikeCount;
+	}
+}
+
+/**
+ * This function is getting called to add the dislike vote to the current node.
+ * Data type is post.
+ * Using Voting API to add votes and also to select the number of votes.
+ * TODO: Need to get the value thought a setting page so that admin can set the number of votes that can be added per dislike
+ * 
+ */
+function _add_entity_dislike() {
+	global $user;
+	if ($_GET['entityid']) {
+		$nodeId = $_GET['entityid'];
+		$entity_type = $_GET['entity'];
+		
+		//Check if liked
+		$checkCriteria = array(
+			'entity_id' => $nodeId,
+			'tag' => 'vote_updown',
+			'uid' => $user->uid,
+			'entity_type' => $entity_type,
+		);
+		$likeResult = votingapi_select_votes($checkCriteria);
+		$likeCount = sizeof(votingapi_select_votes($checkCriteria));
+		
+		if ($likeCount == 1) {
+			print $likeResult->vote_id;
+			votingapi_delete_votes($likeResult);
+		}
+		
+		$vote = array(
+			'entity_id' => $nodeId,
+			'value'=> -1,
+			'tag' => 'vote_updown',
+			'entity_type' => $entity_type,
+   'value_type' => 'option',
+		);
+		$setVote = votingapi_set_votes($vote);
+		
+		//Generating the likeCount and dislikeCount again.
+		$criteriaLike = array(
+			'entity_id' => $nodeId,
+			'tag' => 'vote_updown',
+			'entity_type' => $entity_type,
+		);
+		$criteriaDislike = array(
+			'entity_id' => $nodeId,
+			'tag' => 'vote_updown',
+			'entity_type' => $entity_type,
+		);
+		
+		$likeCount = sizeof(votingapi_select_votes($criteriaLike));
+		$dislikeCount = sizeof(votingapi_select_votes($criteriaDislike));
+		print $likeCount . "/" . $dislikeCount;
+	}
+}
+
+/**
+ * This function gives back the number of votes for a particular node with a particular type of voting.
+ * For example it can be used to get number of likes and also dislikes. Just need to change the type.
+ * 
+ * @param type $nodeId: the node id of the node for which number of votes is requited.
+ * @param type $type: the category of vote: like/dislike etc.
+ */
+function _get_entity_vote_count($nodeId,$type,$entity,$uid=NULL) {
+	if ($uid == NULL) {
+		$criteria = array(
+			'entity_id' => $nodeId,
+			'tag' => $type,
+			'entity_type' => $entity,
+		);
+	} else {
+		$criteria = array(
+			'entity_id' => $nodeId,
+			'tag' => $type,
+			'uid' => $uid,
+			'entity_type' => $entity,
+		);
+	}
+	$count = sizeof(votingapi_select_votes($criteria));
+	if (!isset($count)) {
+		$count = 0;
+	}
+	return $count;
+}

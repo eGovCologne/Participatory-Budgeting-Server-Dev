@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the smartIP feature.
+ */
+
+include_once 'smartip.features.inc';
