@@ -60,3 +60,6 @@ features[user_permission][] = get any binary files
 features[user_permission][] = get own binary files
 features[user_permission][] = like node
 features[views_view][] = Proposals
+features_exclude[field][taxonomy_term-category-field_category_hex] = taxonomy_term-category-field_category_hex
+features_exclude[field][taxonomy_term-category-field_category_id] = taxonomy_term-category-field_category_id
+features_exclude[field][taxonomy_term-status-field_status_hex] = taxonomy_term-status-field_status_hex
