@@ -28,11 +28,21 @@ function smartip_user_default_permissions() {
     'module' => 'likedislike',
   );
 
+  // Exported permission: get a system variable.
+  $permissions['get a system variable'] = array(
+    'name' => 'get a system variable',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'services',
+  );
+
   // Exported permission: get any binary files.
   $permissions['get any binary files'] = array(
     'name' => 'get any binary files',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'services',
   );
@@ -42,6 +52,7 @@ function smartip_user_default_permissions() {
     'name' => 'get own binary files',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'services',
   );
@@ -53,6 +64,25 @@ function smartip_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'likedislike',
+  );
+
+  // Exported permission: save file information.
+  $permissions['save file information'] = array(
+    'name' => 'save file information',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'services',
+  );
+
+  // Exported permission: set a system variable.
+  $permissions['set a system variable'] = array(
+    'name' => 'set a system variable',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'services',
   );
 
   return $permissions;
