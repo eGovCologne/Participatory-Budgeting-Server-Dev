@@ -41,7 +41,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['relationships']['field_category_tid']['id'] = 'field_category_tid';
   $handler->display->display_options['relationships']['field_category_tid']['table'] = 'field_data_field_category';
   $handler->display->display_options['relationships']['field_category_tid']['field'] = 'field_category_tid';
-  /* Relationship: Broken/missing handler */
+  /* Relationship: Content: Status (field_status) */
   $handler->display->display_options['relationships']['field_status_tid']['id'] = 'field_status_tid';
   $handler->display->display_options['relationships']['field_status_tid']['table'] = 'field_data_field_status';
   $handler->display->display_options['relationships']['field_status_tid']['field'] = 'field_status_tid';
@@ -96,7 +96,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'created';
   $handler->display->display_options['fields']['created']['date_format'] = 'long';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Status */
   $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
   $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
   $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
@@ -117,14 +117,14 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '600',
   );
-  /* Field: Broken/missing handler */
+  /* Field: Status Hex Value */
   $handler->display->display_options['fields']['field_status_hex']['id'] = 'field_status_hex';
   $handler->display->display_options['fields']['field_status_hex']['table'] = 'field_data_field_status_hex';
   $handler->display->display_options['fields']['field_status_hex']['field'] = 'field_status_hex';
   $handler->display->display_options['fields']['field_status_hex']['relationship'] = 'field_status_tid';
   $handler->display->display_options['fields']['field_status_hex']['ui_name'] = 'Status Hex Value';
   $handler->display->display_options['fields']['field_status_hex']['hide_alter_empty'] = FALSE;
-  /* Field: Broken/missing handler */
+  /* Field: Taxonomy term: categoryHex */
   $handler->display->display_options['fields']['field_category_hex']['id'] = 'field_category_hex';
   $handler->display->display_options['fields']['field_category_hex']['table'] = 'field_data_field_category_hex';
   $handler->display->display_options['fields']['field_category_hex']['field'] = 'field_category_hex';
@@ -174,7 +174,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['value']['label'] = 'ratingsCount';
   $handler->display->display_options['fields']['value']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['value']['precision'] = '0';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Rating */
   $handler->display->display_options['fields']['field_relevance']['id'] = 'field_relevance';
   $handler->display->display_options['fields']['field_relevance']['table'] = 'field_data_field_relevance';
   $handler->display->display_options['fields']['field_relevance']['field'] = 'field_relevance';
@@ -185,7 +185,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['field_common']['id'] = 'field_common';
   $handler->display->display_options['fields']['field_common']['table'] = 'field_data_field_common';
   $handler->display->display_options['fields']['field_common']['field'] = 'field_common';
-  /* Field: Broken/missing handler */
+  /* Field: Taxonomy term: categoryId */
   $handler->display->display_options['fields']['field_category_id']['id'] = 'field_category_id';
   $handler->display->display_options['fields']['field_category_id']['table'] = 'field_data_field_category_id';
   $handler->display->display_options['fields']['field_category_id']['field'] = 'field_category_id';
@@ -202,7 +202,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['field_address']['field'] = 'field_address';
   $handler->display->display_options['fields']['field_address']['ui_name'] = 'address';
   $handler->display->display_options['fields']['field_address']['label'] = 'address';
-  /* Field: Broken/missing handler */
+  /* Field: zip */
   $handler->display->display_options['fields']['field_zip']['id'] = 'field_zip';
   $handler->display->display_options['fields']['field_zip']['table'] = 'field_data_field_zip';
   $handler->display->display_options['fields']['field_zip']['field'] = 'field_zip';
@@ -260,7 +260,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['sorts']['field_category_tid']['field'] = 'field_category_tid';
   $handler->display->display_options['sorts']['field_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['field_category_tid']['expose']['label'] = 'Kategorie wählen';
-  /* Sort criterion: Broken/missing handler */
+  /* Sort criterion: Content: Status (field_status) */
   $handler->display->display_options['sorts']['field_status_tid']['id'] = 'field_status_tid';
   $handler->display->display_options['sorts']['field_status_tid']['table'] = 'field_data_field_status';
   $handler->display->display_options['sorts']['field_status_tid']['field'] = 'field_status_tid';
@@ -274,7 +274,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['arguments']['field_category_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_category_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_category_tid']['summary_options']['items_per_page'] = '25';
-  /* Contextual filter: Broken/missing handler */
+  /* Contextual filter: Content: Status (field_status) */
   $handler->display->display_options['arguments']['field_status_tid']['id'] = 'field_status_tid';
   $handler->display->display_options['arguments']['field_status_tid']['table'] = 'field_data_field_status';
   $handler->display->display_options['arguments']['field_status_tid']['field'] = 'field_status_tid';
@@ -315,7 +315,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['filters']['field_category_tid']['expose']['identifier'] = 'field_category_tid';
   $handler->display->display_options['filters']['field_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_category_tid']['vocabulary'] = 'category';
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Content: Status (field_status) */
   $handler->display->display_options['filters']['field_status_tid']['id'] = 'field_status_tid';
   $handler->display->display_options['filters']['field_status_tid']['table'] = 'field_data_field_status';
   $handler->display->display_options['filters']['field_status_tid']['field'] = 'field_status_tid';
@@ -325,6 +325,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['filters']['field_status_tid']['expose']['label'] = 'Status';
   $handler->display->display_options['filters']['field_status_tid']['expose']['operator'] = 'field_status_tid_op';
   $handler->display->display_options['filters']['field_status_tid']['expose']['identifier'] = 'field_status_tid';
+  $handler->display->display_options['filters']['field_status_tid']['vocabulary'] = 'category';
 
   /* Display: Feed */
   $handler = $view->new_display('feed', 'Feed', 'feed_1');
@@ -379,7 +380,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['field_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_category']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_category']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Status */
   $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
   $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
   $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
@@ -391,7 +392,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['field_status']['element_class'] = 'marker-status col-[field_status_hex]';
   $handler->display->display_options['fields']['field_status']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_status']['hide_alter_empty'] = FALSE;
-  /* Field: Broken/missing handler */
+  /* Field: Taxonomy term: statusHex */
   $handler->display->display_options['fields']['field_status_hex']['id'] = 'field_status_hex';
   $handler->display->display_options['fields']['field_status_hex']['table'] = 'field_data_field_status_hex';
   $handler->display->display_options['fields']['field_status_hex']['field'] = 'field_status_hex';
@@ -400,7 +401,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['field_status_hex']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_status_hex']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_status_hex']['hide_alter_empty'] = FALSE;
-  /* Field: Broken/missing handler */
+  /* Field: Taxonomy term: categoryHex */
   $handler->display->display_options['fields']['field_category_hex']['id'] = 'field_category_hex';
   $handler->display->display_options['fields']['field_category_hex']['table'] = 'field_data_field_category_hex';
   $handler->display->display_options['fields']['field_category_hex']['field'] = 'field_category_hex';
@@ -468,7 +469,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['value']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['value']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['value']['precision'] = '0';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Rating */
   $handler->display->display_options['fields']['field_relevance']['id'] = 'field_relevance';
   $handler->display->display_options['fields']['field_relevance']['table'] = 'field_data_field_relevance';
   $handler->display->display_options['fields']['field_relevance']['field'] = 'field_relevance';
@@ -495,7 +496,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['field_address']['label'] = '';
   $handler->display->display_options['fields']['field_address']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_address']['element_label_colon'] = FALSE;
-  /* Field: Broken/missing handler */
+  /* Field: Content: Zip */
   $handler->display->display_options['fields']['field_zip']['id'] = 'field_zip';
   $handler->display->display_options['fields']['field_zip']['table'] = 'field_data_field_zip';
   $handler->display->display_options['fields']['field_zip']['field'] = 'field_zip';
@@ -520,7 +521,7 @@ function smartip_views_default_views() {
 [field_zip] [field_city]</p>
 </div>';
   $handler->display->display_options['fields']['nothing_1']['hide_alter_empty'] = TRUE;
-  /* Field: Broken/missing handler */
+  /* Field: Content: Rating */
   $handler->display->display_options['fields']['field_relevance_1']['id'] = 'field_relevance_1';
   $handler->display->display_options['fields']['field_relevance_1']['table'] = 'field_data_field_relevance';
   $handler->display->display_options['fields']['field_relevance_1']['field'] = 'field_relevance';
@@ -589,7 +590,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Broken/missing handler */
+  /* Field: Content: Status */
   $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
   $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
   $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
@@ -614,7 +615,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['field_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_category']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_category']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Broken/missing handler */
+  /* Field: Taxonomy term: statusHex */
   $handler->display->display_options['fields']['field_status_hex']['id'] = 'field_status_hex';
   $handler->display->display_options['fields']['field_status_hex']['table'] = 'field_data_field_status_hex';
   $handler->display->display_options['fields']['field_status_hex']['field'] = 'field_status_hex';
@@ -623,7 +624,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['fields']['field_status_hex']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_status_hex']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_status_hex']['hide_alter_empty'] = FALSE;
-  /* Field: Broken/missing handler */
+  /* Field: Taxonomy term: categoryHex */
   $handler->display->display_options['fields']['field_category_hex']['id'] = 'field_category_hex';
   $handler->display->display_options['fields']['field_category_hex']['table'] = 'field_data_field_category_hex';
   $handler->display->display_options['fields']['field_category_hex']['field'] = 'field_category_hex';
@@ -735,7 +736,7 @@ function smartip_views_default_views() {
 ';
   $handler->display->display_options['fields']['field_common']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_common']['type'] = 'list_key';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Rating */
   $handler->display->display_options['fields']['field_relevance_1']['id'] = 'field_relevance_1';
   $handler->display->display_options['fields']['field_relevance_1']['table'] = 'field_data_field_relevance';
   $handler->display->display_options['fields']['field_relevance_1']['field'] = 'field_relevance';
@@ -874,7 +875,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['filters']['field_category_tid']['expose']['identifier'] = 'field_category_tid';
   $handler->display->display_options['filters']['field_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_category_tid']['vocabulary'] = 'category';
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Content: Status (field_status) */
   $handler->display->display_options['filters']['field_status_tid']['id'] = 'field_status_tid';
   $handler->display->display_options['filters']['field_status_tid']['table'] = 'field_data_field_status';
   $handler->display->display_options['filters']['field_status_tid']['field'] = 'field_status_tid';
@@ -884,6 +885,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['filters']['field_status_tid']['expose']['label'] = 'Status';
   $handler->display->display_options['filters']['field_status_tid']['expose']['operator'] = 'field_status_tid_op';
   $handler->display->display_options['filters']['field_status_tid']['expose']['identifier'] = 'field_status_tid';
+  $handler->display->display_options['filters']['field_status_tid']['vocabulary'] = 'category';
   /* Filter criterion: greater lat */
   $handler->display->display_options['filters']['field_geo_lat']['id'] = 'field_geo_lat';
   $handler->display->display_options['filters']['field_geo_lat']['table'] = 'field_data_field_geo';
@@ -995,7 +997,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['filters']['field_category_tid']['expose']['identifier'] = 'field_category_tid';
   $handler->display->display_options['filters']['field_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_category_tid']['vocabulary'] = 'category';
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Content: Status (field_status) */
   $handler->display->display_options['filters']['field_status_tid']['id'] = 'field_status_tid';
   $handler->display->display_options['filters']['field_status_tid']['table'] = 'field_data_field_status';
   $handler->display->display_options['filters']['field_status_tid']['field'] = 'field_status_tid';
@@ -1005,6 +1007,7 @@ function smartip_views_default_views() {
   $handler->display->display_options['filters']['field_status_tid']['expose']['label'] = 'Status';
   $handler->display->display_options['filters']['field_status_tid']['expose']['operator'] = 'field_status_tid_op';
   $handler->display->display_options['filters']['field_status_tid']['expose']['identifier'] = 'field_status_tid';
+  $handler->display->display_options['filters']['field_status_tid']['vocabulary'] = 'category';
   /* Filter criterion: greater lat */
   $handler->display->display_options['filters']['field_geo_lat']['id'] = 'field_geo_lat';
   $handler->display->display_options['filters']['field_geo_lat']['table'] = 'field_data_field_geo';
